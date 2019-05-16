@@ -1,22 +1,32 @@
-<h1 class = "ui header">People</h1>
-<table class = "ui striped table">
-  <thead>
-    <tr class = "center aligned">
-      <th colspan = "4"></th>
-    </tr>
-  </thead>
-  
-  <tbody>
+<h1 class="ui header">People</h1>
+<%= link_to 'New Person', new_person_path, class:"ui button red" %>
+<div class="ui divider"></div>
+
+<div class="ui grid">
   <% @people.each do |person| %>
-    <tr class = "center aligned">
-      <td>
-        <img class = "ui avatar image small" src= "https://robohash.org/<%= person.avatar %>?set=set4"
-        />
-      </td>
-      <td><%= link_to "Show", person_path(person) %></td>
-      <td><%= link_to "Edit", edit_person_path(person) %></td>
-      <td><%= link_to "Delete", person_path(person), method: :delete %></td>
-    </tr>
-    <% end %>
-  </tbody>
-  </table>
+    <div class="sixteen wide mobile eight wide tablet four wide computer column">
+      <div class="ui card">
+        <div class="image">
+          <img src="https://robohash.org/<%= person.avatar %>?set=set4" />
+        </div>
+        <div class="content">
+          <%= link_to person.full_name, person, class: "header" %>
+        </div>
+        <div class="extra content">
+          <div class="ui two buttons">
+              <%= link_to (edit_person_path(person)) do  %>
+            <div class="ui basic green button">
+            Edit
+            </div>
+            <%end%>
+            <%= link_to(person_path(person), method: :delete, data: { confirm: "Are You Sure?"}) do%>
+            <div class="ui basic red button">
+              Delete 
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
